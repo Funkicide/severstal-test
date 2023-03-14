@@ -44,6 +44,7 @@ const AddNoteForm = () => {
               rows={3}
               type="text"
               name="text"
+              placeholder="Enter your note here"
               value={formik.values.text}
               onChange={formik.handleChange}
               required
