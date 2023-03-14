@@ -8,9 +8,9 @@ type Note = {
   text: string;
 };
 
-const initialState: Note[] = [
-  { id: nanoid(), title: "Default title", text: "Default text" },
-];
+const initialState: { notes: Note[] } = {
+  notes: [{ id: nanoid(), title: "Default title", text: "Default text" }],
+};
 
 const notesSlice = createSlice({
   name: "notes",
@@ -18,24 +18,28 @@ const notesSlice = createSlice({
   reducers: {
     createNote: {
       reducer: (state, { payload }: PayloadAction<Note>) => {
-        state.push(payload);
+        state.notes.push(payload);
       },
       prepare: (title, text) => {
         return { payload: { id: nanoid(), title, text } };
       },
     },
-    updateNote: (state, { payload: { id } }) => {
-      const updatedNote = state.filter((note) => note.id === id);
-      console.log(updatedNote);
+    updateNote: (state, { payload: { id, title, text } }) => {
+      const updatedNote = state.notes.find((note) => note.id === id);
+      if (updatedNote) {
+        console.log(updatedNote);
+        updatedNote.title = title;
+        updatedNote.title = text;
+      }
     },
     deleteNote: (state, { payload: { id } }) => {
-      return (state = state.filter((note) => note.id !== id));
+      state.notes = state.notes.filter((note) => note.id !== id);
     },
   },
 });
 
 export const notesSelectors = {
-  selectAllNotes: (state: RootState) => state.notes,
+  selectAllNotes: (state: RootState) => state.notes.notes,
 };
 
 export const { createNote, updateNote, deleteNote } = notesSlice.actions;
