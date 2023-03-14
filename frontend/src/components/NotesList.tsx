@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../slices/store";
+import { Card, Button, Stack } from "react-bootstrap";
 
 import { notesSelectors } from "../slices/notesSlice";
 import { deleteNote } from "../slices/notesSlice";
@@ -18,21 +19,29 @@ const NotesList = () => {
   };
 
   const renderedNotes = notes.map((note) => (
-    <article key={note.id}>
-      <h3>{note.title}</h3>
-      <p>{note.text}</p>
-      <button type="button" onClick={handleEdit(note.id)}>
-        Edit
-      </button>
-      <button type="button" onClick={handleDelete(note.id)}>
-        Delete
-      </button>
-    </article>
+    <Card key={note.id} as="article" className="mb-3">
+      <Card.Header as="h3">{note.title}</Card.Header>
+      <Card.Body>
+        <Card.Text>{note.text}</Card.Text>
+      </Card.Body>
+      <Card.Footer>
+        <Stack direction="horizontal" gap={2}>
+          <Button variant="primary" onClick={handleEdit(note.id)}>
+            Edit
+          </Button>{" "}
+          <Button variant="danger" onClick={handleDelete(note.id)}>
+            Delete
+          </Button>
+        </Stack>
+      </Card.Footer>
+    </Card>
   ));
 
   return (
     <section>
-      <h2>Notes</h2>
+      <Card className="mb-3">
+        <Card.Header as="h3">Notes</Card.Header>
+      </Card>
       {renderedNotes}
     </section>
   );
