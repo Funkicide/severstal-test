@@ -1,5 +1,6 @@
 import NotesList from "./components/NotesList";
 import AddNoteForm from "./components/AddNoteForm";
+import EditModal from "./components/EditModal";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,6 +9,7 @@ const App = () => {
     <main>
       <AddNoteForm />
       <NotesList />
+      <EditModal />
     </main>
   );
 };

@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../slices/store";
 
 import { notesSelectors } from "../slices/notesSlice";
-import { updateNote, deleteNote } from "../slices/notesSlice";
+import { deleteNote } from "../slices/notesSlice";
+import { openModal } from "../slices/modalSlice";
 
 const NotesList = () => {
   const dispatch = useAppDispatch();
@@ -9,7 +10,7 @@ const NotesList = () => {
   const notes = useAppSelector(notesSelectors.selectAllNotes);
 
   const handleEdit = (id: string) => () => {
-    dispatch(updateNote({ id }));
+    dispatch(openModal(id));
   };
 
   const handleDelete = (id: string) => () => {

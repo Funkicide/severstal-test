@@ -3,21 +3,26 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import throttle from "lodash.throttle";
 
 import notesReducer from "./notesSlice";
+import modalReducer from "./modalSlice";
 
-const preloadedState = localStorage.getItem("notes")
-  ? JSON.parse(localStorage.getItem("notes") as string)
-  : undefined;
+const preloadedState = {
+  notes: localStorage.getItem("notes")
+    ? JSON.parse(localStorage.getItem("notes") as string)
+    : undefined,
+  modal: undefined,
+};
 
 export const store = configureStore({
   reducer: {
     notes: notesReducer,
+    modal: modalReducer,
   },
   preloadedState,
 });
 
 store.subscribe(
   throttle(() => {
-    localStorage.setItem("notes", JSON.stringify(store.getState()));
+    localStorage.setItem("notes", JSON.stringify(store.getState().notes));
   }, 1000)
 );
 

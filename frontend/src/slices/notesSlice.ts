@@ -2,7 +2,7 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 
-type Note = {
+export type Note = {
   id: string;
   title: string;
   text: string;
@@ -27,9 +27,8 @@ const notesSlice = createSlice({
     updateNote: (state, { payload: { id, title, text } }) => {
       const updatedNote = state.notes.find((note) => note.id === id);
       if (updatedNote) {
-        console.log(updatedNote);
         updatedNote.title = title;
-        updatedNote.title = text;
+        updatedNote.text = text;
       }
     },
     deleteNote: (state, { payload: { id } }) => {
@@ -40,6 +39,8 @@ const notesSlice = createSlice({
 
 export const notesSelectors = {
   selectAllNotes: (state: RootState) => state.notes.notes,
+  selectCurrentNote: (state: RootState) =>
+    state.notes.notes.find((note) => note.id === state.modal.noteId),
 };
 
 export const { createNote, updateNote, deleteNote } = notesSlice.actions;
