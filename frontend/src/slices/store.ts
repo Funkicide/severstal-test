@@ -1,5 +1,7 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import throttle from "lodash.throttle";
+
 import notesReducer from "./notesSlice";
 
 const preloadedState = localStorage.getItem("notes")
@@ -13,9 +15,11 @@ export const store = configureStore({
   preloadedState,
 });
 
-store.subscribe(() => {
-  localStorage.setItem("notes", JSON.stringify(store.getState()));
-});
+store.subscribe(
+  throttle(() => {
+    localStorage.setItem("notes", JSON.stringify(store.getState()));
+  }, 1000)
+);
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
