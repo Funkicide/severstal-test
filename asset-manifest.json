@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/severstal-test/static/css/main.a1c7c900.css",
+    "main.js": "/severstal-test/static/js/main.4ee02ca5.js",
+    "index.html": "/severstal-test/index.html",
+    "main.a1c7c900.css.map": "/severstal-test/static/css/main.a1c7c900.css.map",
+    "main.4ee02ca5.js.map": "/severstal-test/static/js/main.4ee02ca5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a1c7c900.css",
+    "static/js/main.4ee02ca5.js"
+  ]
+}
