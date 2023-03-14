@@ -65,7 +65,7 @@ const EditModal = () => {
               required
             />
           </Form.Group>
-          <Button size="lg" variant="primary" type="submit">
+          <Button size="lg" variant="success" type="submit">
             Save note
           </Button>
         </Form>
